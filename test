@@ -1,0 +1,11 @@
+const { expect } = require("chai");
+
+describe("MyToken", function () {
+  it("assigns initial supply to deployer", async function () {
+    const [owner] = await ethers.getSigners();
+    const Token = await ethers.getContractFactory("MyToken");
+    const t = await Token.deploy(1000);
+    await t.deployed();
+    expect(await t.balanceOf(owner.address)).to.equal(await t.totalSupply());
+  });
+});
