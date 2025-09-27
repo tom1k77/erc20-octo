@@ -1,0 +1,11 @@
+async function main() {
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying with:", deployer.address);
+
+  const Token = await ethers.getContractFactory("MyToken");
+  const token = await Token.deploy(1_000_000);
+  await token.deployed();
+
+  console.log("MyToken at:", token.address);
+}
+main().catch((e)=>{ console.error(e); process.exit(1); });
